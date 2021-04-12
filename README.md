@@ -8,17 +8,27 @@ cache eviction scheme](http://dhruvbird.com/lfu.pdf)
 
 
 ```go
-import "github.com/Anshumakkar/lfu-go/"
+package main
 
-// Make a new cache with capacity of cache.
-cache := NewLFUCache(10)
+import (
+	"fmt"
 
-// Set some values to cache
-c.Set("key", value)
+	lfu "github.com/Anshumakkar/lfu-go"
+)
 
-// Retrieve the values from cache
-value = c.Get("key")
+func main() {
+	// Make a new cache with capacity of cache.
+	cache := lfu.NewLFUCache(10)
 
-// Evict values from cache forcefully
-c.Evict(1)
+	// Set some values to cache
+	cache.Set("key", "value")
+
+	// Retrieve the values from cache
+	value := cache.Get("key")
+	fmt.Println(value)
+	// Evict values from cache forcefully
+	evictedCount := cache.Evict(1)
+	fmt.Println("Evicted count is ", evictedCount)
+}
+
 ```
